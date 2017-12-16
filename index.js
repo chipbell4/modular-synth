@@ -4,19 +4,18 @@ const Speaker = require('speaker');
 const Readable = require('stream').Readable;
 
 const constants = require('./constants');
+const Sine = require('./waveforms/sine');
+const util = require('./waveforms/util');
 
 let stream = new Readable();
-let t = 0.0
+let sampleIndex = 0;
+let oscillator = new Sine(440);
 stream._read = function() {
-  t += 0.02;
-
-  let f = 30 + 5 * Math.sin(t);
-  for(let k = 0; k < f; k++) {
-    stream.push(String.fromCharCode(0));
-  }
-
-  for(let k = 0; k < f; k++) {
-    stream.push(String.fromCharCode(127));
+  for(let k = 0; k < constants.SAMPLES_PER_READ; k++) {
+    let t = util.sampleIndexToTime(sampleIndex);
+    let outputs = [oscillator.value(t)];
+    stream.push(util.waveformOutputsToBinary(outputs));
+    sampleIndex++;
   }
 };
 
