@@ -9,6 +9,7 @@
   "author": "Chip Bell",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "blessed": "^0.1.81",
     "speaker": "^0.4.0"
   }
 }
