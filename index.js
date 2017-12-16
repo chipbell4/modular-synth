@@ -9,11 +9,20 @@ const util = require('./waveforms/util');
 
 let stream = new Readable();
 let sampleIndex = 0;
-let oscillator = new Sine(440);
+let oscillators = [
+  new Sine(220),
+  new Sine(220 * 5 / 4),
+  new Sine(220 * 3 / 2)
+];
+
 stream._read = function() {
   for(let k = 0; k < constants.SAMPLES_PER_READ; k++) {
     let t = util.sampleIndexToTime(sampleIndex);
-    let outputs = [oscillator.value(t)];
+    let outputs = [];
+    for(let i = 0; i < oscillators.length; i++) {
+      outputs.push(oscillators[i].value(t));
+    }
+
     stream.push(util.waveformOutputsToBinary(outputs));
     sampleIndex++;
   }
