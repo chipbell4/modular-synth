@@ -6,9 +6,9 @@ const Readable = require('stream').Readable;
 let stream = new Readable();
 let t = 0.0
 stream._read = function() {
-  t += 0.01;
+  t += 0.02;
 
-  let f = 30 + 10 * Math.sin(t);
+  let f = 30 + 5 * Math.sin(t);
   for(let k = 0; k < f; k++) {
     stream.push(String.fromCharCode(0));
   }
