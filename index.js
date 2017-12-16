@@ -3,6 +3,8 @@
 const Speaker = require('speaker');
 const Readable = require('stream').Readable;
 
+const constants = require('./constants');
+
 let stream = new Readable();
 let t = 0.0
 stream._read = function() {
@@ -20,9 +22,9 @@ stream._read = function() {
 
 // Create the Speaker instance
 const speaker = new Speaker({
-  channels: 1,
-  bitDepth: 8,
-  sampleRate: 20000
+  channels: constants.CHANNELS,
+  bitDepth: constants.BIT_DEPTH,
+  sampleRate: constants.SAMPLE_RATE
 });
 
 // PCM data from stdin gets piped into the speaker
