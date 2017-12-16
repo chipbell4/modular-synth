@@ -6,18 +6,22 @@ const Readable = require('stream').Readable;
 let stream = new Readable();
 let t = 0.0
 stream._read = function() {
-  for(let k = 0; k < 2000; k++) {
-    let amplitude = (Math.sin(t) + 1) * 0.5 * 65535;
-    let letter = String.fromCharCode(Math.floor(amplitude));
-    stream.push(letter);
-    t += 0.1;
+  t += 0.01;
+
+  let f = 30 + 10 * Math.sin(t);
+  for(let k = 0; k < f; k++) {
+    stream.push(String.fromCharCode(0));
+  }
+
+  for(let k = 0; k < f; k++) {
+    stream.push(String.fromCharCode(127));
   }
 };
 
 // Create the Speaker instance
 const speaker = new Speaker({
   channels: 1,
-  bitDepth: 16,
+  bitDepth: 8,
   sampleRate: 20000
 });
 
