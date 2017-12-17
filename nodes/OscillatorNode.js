@@ -31,8 +31,6 @@ class OscillatorNode extends Node {
 
     return String.fromCharCode(value);
   }
-
-
 }
 
 module.exports = OscillatorNode;
