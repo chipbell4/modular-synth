@@ -14,13 +14,7 @@ class OscillatorNode extends Node {
     this.outputStream._read = function() {
       let period = 1 / this.frequency; 
       for(let t = 0; t < period; t += dt) {
-        let rawValue = 0;
-        if(this.waveform === 'sine') {
-          rawValue = this.sine(t);
-        }
-        if(this.waveform === 'square') {
-          rawValue = this.square(t);
-        }
+        let rawValue = this.sine(t);
         this.outputStream.push(this.rawValueToByte(rawValue));
       }
     }.bind(this);
