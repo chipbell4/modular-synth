@@ -12,3 +12,5 @@ class Node {
     otherNode.outputStream.pipe(this.streams[streamId]);
   }
 }
+
+module.exports = Node;
