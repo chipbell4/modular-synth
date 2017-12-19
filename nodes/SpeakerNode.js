@@ -19,14 +19,15 @@ class SpeakerNode extends Node {
     this.input = () => 0;
 
     var reader = new Readable();
-    let t = 0;
+    let totalSamples = 0;
     reader._read = () => {
       for(let i = 0; i < 2000; i++) {
+        let t = totalSamples / constants.SAMPLE_RATE;
         let rawValue = this.input(t);
         let byteValue = String.fromCharCode(Math.floor((rawValue * 127) % 128))
         reader.push(byteValue);
 
-        t += 1 / constants.SAMPLE_RATE;
+        totalSamples++;
       }
     };
 
