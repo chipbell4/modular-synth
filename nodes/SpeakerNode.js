@@ -24,7 +24,8 @@ class SpeakerNode extends Node {
       for(let i = 0; i < 2000; i++) {
         let t = totalSamples / constants.SAMPLE_RATE;
         let rawValue = this.input(t);
-        let byteValue = String.fromCharCode(Math.floor((rawValue * 127) % 128))
+        let clampedValue = ((rawValue + 1) * 128) % 128;
+        let byteValue = String.fromCharCode(Math.floor(clampedValue))
         reader.push(byteValue);
 
         totalSamples++;
