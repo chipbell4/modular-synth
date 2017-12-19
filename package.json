@@ -10,6 +10,7 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "blessed": "^0.1.81",
+    "midi": "^0.9.5",
     "speaker": "^0.4.0"
   }
 }
