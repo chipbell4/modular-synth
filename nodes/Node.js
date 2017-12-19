@@ -1,15 +1,13 @@
 'use strict';
 
-const Readable = require('stream').Readable;
-
 class Node {
   constructor() {
-    this.streams = {};
-    this.outputStream = new Readable();
+    // so this.value can be assigned more easily
+    this.value = this.value.bind(this);
   }
 
-  receive(streamId, otherNode) {
-    otherNode.outputStream.pipe(this.streams[streamId]);
+  value(t) {
+    return 0;
   }
 }
 

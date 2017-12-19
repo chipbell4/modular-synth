@@ -6,10 +6,11 @@ const SpeakerNode = require('./nodes/SpeakerNode');
 const MidiNode = require('./nodes/MidiNode');
 
 let noise = new NoiseNode();
-let midi = new MidiNode();
 let oscillator = new OscillatorNode(220, 'sine');
 let speaker = new SpeakerNode();
 
-oscillator.streams.frequency = midi.outputStream;
+oscillator.frequency = (t) => {
+  return 220 + 10 * Math.sin(t * Math.PI * 2);
+};
 
-speaker.receive('speaker', oscillator);
+speaker.input = oscillator.value;
