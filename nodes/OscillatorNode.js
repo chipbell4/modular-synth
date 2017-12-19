@@ -7,13 +7,14 @@ class OscillatorNode extends Node {
   constructor(frequency) {
     super();
 
-    this.frequency = () => frequency;
+    this.carrier = () => frequency;
+    this.modulation = () => 0;
   }
 
   value(t) {
-    let frequency = this.frequency(t);
-    let returnValue = 0.5 * (1 + Math.sin(t * frequency * 2 * Math.PI));
-    return returnValue;
+    let carrier = this.carrier(t);
+    let inner = 2 * Math.PI * carrier * t + this.modulation(t);
+    return 0.5 * (1 + Math.sin(inner));
   }
 }
 

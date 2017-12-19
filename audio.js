@@ -9,8 +9,9 @@ let noise = new NoiseNode();
 let oscillator = new OscillatorNode(220, 'sine');
 let speaker = new SpeakerNode();
 
-oscillator.frequency = (t) => {
-  return 220 + 10 * Math.sin(t * Math.PI * 2);
+oscillator.modulation = (t) => {
+  let lfoFrequency = 5;
+  return 50 * Math.cos(lfoFrequency * t * 2 * Math.PI);
 };
 
 speaker.input = oscillator.value;
