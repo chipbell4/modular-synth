@@ -13,6 +13,7 @@ let speaker = new SpeakerNode();
 lfo.amplitude = () => 100;
 lfo.carrier = () => 2;
 
+oscillator.waveform = 'square';
 oscillator.modulation = lfo.value;
 
 speaker.input = oscillator.value;
