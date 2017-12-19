@@ -6,12 +6,13 @@ const SpeakerNode = require('./nodes/SpeakerNode');
 const MidiNode = require('./nodes/MidiNode');
 
 let noise = new NoiseNode();
-let oscillator = new OscillatorNode(220, 'sine');
+let oscillator = new OscillatorNode();
+let lfo = new OscillatorNode();
 let speaker = new SpeakerNode();
 
-oscillator.modulation = (t) => {
-  let lfoFrequency = 5;
-  return 50 * Math.cos(lfoFrequency * t * 2 * Math.PI);
-};
+lfo.amplitude = () => 100;
+lfo.carrier = () => 2;
+
+oscillator.modulation = lfo.value;
 
 speaker.input = oscillator.value;
