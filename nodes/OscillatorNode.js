@@ -21,11 +21,13 @@ class OscillatorNode extends Node {
       let inner = 2 * Math.PI * carrier * t + modulation;
       return 0.5 * this.amplitude(t) * (1 + Math.sin(inner));
     } else if(this.waveform === 'square') {
-      return 1 / 3 * (
+      return (
           Math.sin(2 * Math.PI * carrier * t + modulation) +
           Math.sin(6 * Math.PI * carrier * t + modulation) / 3 +
-          Math.sin(10 * Math.PI * carrier * t * modulation) / 5
-          );
+          Math.sin(10 * Math.PI * carrier * t + modulation) / 5 +
+          Math.sin(14 * Math.PI * carrier * t + modulation) / 7
+          + 4
+        ) * 0.25;
     }
   }
 }
