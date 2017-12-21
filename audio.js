@@ -17,12 +17,12 @@ lfo.amplitude = () => 0.1;
 lfo.carrier = () => 10;
 
 oscillator.waveform = 'square';
-oscillator.carrier = () => 220;
-oscillator.modulation = lfo.value;
+oscillator.carrier = () => 120;
+//oscillator.modulation = lfo.value;
 
 let lfo2 = new OscillatorNode();
 lfo2.amplitude = () => 100;
-lfo2.carrier = () => 0.5;
+lfo2.carrier = () => 8;
 
 lpf.filterWidth = lfo2.value;
 lpf.input = oscillator.value;
