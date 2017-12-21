@@ -23,11 +23,15 @@ class OscillatorNode extends Node {
     } else if(this.waveform === 'square') {
       let period = 1 / carrier;
       let x = ((t + modulation) % period) / period;
-
-      if(x < 0.5) {
+      const d = 0.01;
+      if(x < 0.5 - d) {
         return 0;
-      } else {
-        return 1.0;
+      } else if(x > 0.5 - d && x < 0.5 + d) {
+        let slope = this.amplitude(t) / 2 / d;
+        let intercept = -(0.5 - d) * slope;
+        return slope * x + intercept;
+      }else {
+        return this.amplitude(t);
       }
     }
 
