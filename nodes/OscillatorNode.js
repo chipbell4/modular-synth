@@ -15,6 +15,10 @@ class OscillatorNode extends Node {
 
   value(t) {
     let carrier = this.carrier(t);
+    if(carrier === 0) {
+      return 0;
+    }
+
     let modulation = this.modulation(t);
 
     if(this.waveform === 'sine') {
