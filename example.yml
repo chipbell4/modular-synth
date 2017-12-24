@@ -1,0 +1,11 @@
+nodes:
+  osc1: Oscillator
+  lfo1: Oscillator
+values:
+  lfo1.carrier: 1
+  lfo1.amplitude: 1
+  osc1.waveform: 'square'
+  osc1.carrier: 220
+connections:
+  lfo1: osc1.modulation
+  osc1: speaker.input

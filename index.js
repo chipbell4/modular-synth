@@ -1,52 +1,44 @@
 'use strict';
 
-const audio = require('./audio');
-const blessed = require('blessed');
+const yaml = require('node-yaml');
+const resolveValue = require('./nodes/resolve-value');
 
-let screen = blessed.screen({
-  smartCSR: true
+var nodeTypes = ['Noise', 'Oscillator', 'LowPassFilter', 'Speaker', 'Sequencer'].reduce((a, b) => {
+  a[b] = require(`./nodes/${b}Node`);
+  return a;
+}, {});
+
+if(process.argv.length !== 3) {
+  console.log('Usage: node index.js file.yml');
+  process.exit(1);
+}
+
+let results = yaml.readSync(process.argv[2]);
+
+// TODO: Validation
+
+// Build nodes
+let nodes = {};
+Object.keys(results.nodes).forEach(nodeName => {
+  let nodeType = results.nodes[nodeName];
+  nodes[nodeName] = new nodeTypes[nodeType];
+});
+nodes.speaker = new nodeTypes.Speaker();
+
+// Set constant values
+Object.keys(results.values).forEach(key => {
+  let nodeName, property;
+  nodeName = key.split('.')[0];
+  property = key.split('.')[1];
+  nodes[nodeName][property] = resolveValue(results.values[key]);
 });
 
-screen.title = 'Synth Yo'
+// build connections
+Object.keys(results.connections).forEach(sender => {
+  let receiver = results.connections[sender];
+  let nodeName, property;
+  nodeName = receiver.split('.')[0];
+  property = receiver.split('.')[1];
 
-// Create a box perfectly centered horizontally and vertically.
-var box = blessed.box({
-  top: 'center',
-  left: 'center',
-  width: '50%',
-  height: '50%',
-  content: 'Hello {bold}world{/bold}!',
-  tags: true,
-  border: {
-    type: 'line'
-  },
-  style: {
-    fg: 'white',
-    bg: 'magenta',
-    border: {
-      fg: '#f0f0f0'
-    },
-    hover: {
-      bg: 'green'
-    }
-  }
+  nodes[nodeName][property] = nodes[sender].value;
 });
-
-// Append our box to the screen.
-screen.append(box);
-
-// If box is focused, handle `enter`/`return` and give us some more content.
-box.key('enter', function(ch, key) {
-  box.setContent('{right}Even different {black-fg}content{/black-fg}.{/right}\n');
-  box.setLine(1, 'bar');
-  box.insertLine(1, 'foo');
-  screen.render();
-});
-
-screen.key(['escape', 'q', 'C-c'], function(ch, key) {
-  return process.exit(0);
-});
-
-// Focus our element.
-box.focus();
-screen.render();
