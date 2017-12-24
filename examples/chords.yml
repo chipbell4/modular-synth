@@ -1,0 +1,13 @@
+nodes:
+  chord1: Sequencer
+  osc1: Oscillator
+  lfo1: Oscillator
+values:
+  chord1.sequence: [311.1, 392, 466.2] # Eb chord
+  chord1.length: 0.05
+  lfo1.carrier: 1
+  lfo1.waveform: 'square'
+connections:
+  chord1: osc1.carrier
+  lfo1: osc1.amplitude
+  osc1: speaker.input
