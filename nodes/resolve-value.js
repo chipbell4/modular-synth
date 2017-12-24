@@ -3,6 +3,10 @@
 const Node = require('./Node');
 
 module.exports = function(value) {
+  if(typeof value === 'string') {
+    return value;
+  }
+
   if(typeof value === 'number') {
     return () => value;
   }
