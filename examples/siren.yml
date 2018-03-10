@@ -1,3 +1,4 @@
+# Currently broken
 nodes:
   osc1: Oscillator
   lfo1: Oscillator

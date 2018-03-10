@@ -9,36 +9,57 @@ class OscillatorNode extends Node {
     this.waveform = 'sine';
     this.amplitude = () => 1;
     this.carrier = () => 440;
-    this.modulation = () => 0;
+
+    this.lastCarrier = this.carrier();
+    this.lastFrame = null;
+    this.localT = 0;
   }
 
   value(t) {
-    let carrier = this.carrier(t);
-    if(carrier === 0) {
-      return 0;
+    if(this.lastFrame == null) {
+      this.lastFrame = t;
     }
+    
+    let dt = t - this.lastFrame;
+    this.lastFrame = t;
+    this.localT += dt;
 
-    let modulation = this.modulation(t);
-
+    let outputValue = 0;
     if(this.waveform === 'sine') {
-      let inner = 2 * Math.PI * carrier * t + modulation;
-      return 0.5 * this.amplitude(t) * (1 + Math.sin(inner));
+      outputValue = this.sine(this.localT);
     } else if(this.waveform === 'square') {
-      let period = 1 / carrier;
-      let x = ((t + modulation) % period) / period;
-      const d = 0.01;
-      if(x < 0.5 - d) {
-        return 0;
-      } else if(x > 0.5 - d && x < 0.5 + d) {
-        let slope = this.amplitude(t) / 2 / d;
-        let intercept = -(0.5 - d) * slope;
-        return slope * x + intercept;
-      }else {
-        return this.amplitude(t);
-      }
+      outputValue = this.square(this.localT);
     }
+
+    // if we're at the end of a cycle for this carrier frequency, let's switch to the next carrier
+    if(this.localT * this.lastCarrier > 1) {
+      this.localT = 0;
+      this.lastCarrier = this.carrier(t);
+    }
+
+    return outputValue;
 
     // TODO: Support Triangle and sawtooth
+  }
+
+  sine(t) {
+    let inner = 2 * Math.PI * this.lastCarrier * t;
+    return 0.5 * this.amplitude(t) * (1 + Math.sin(inner));
+  }
+
+  square(t) {
+    let period = 1 / this.lastCarrier;
+    let x = (t % period) / period;
+    const d = 0.01;
+    if(x < 0.5 - d) {
+      return 0;
+    } else if(x > 0.5 - d && x < 0.5 + d) {
+      let slope = this.amplitude(t) / 2 / d;
+      let intercept = -(0.5 - d) * slope;
+      return slope * x + intercept;
+    } else {
+      return this.amplitude(t);
+    }
   }
 }
 
