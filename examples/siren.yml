@@ -1,12 +1,13 @@
-# Currently broken
 nodes:
   osc1: Oscillator
   lfo1: Oscillator
+  frequency: Adder
 values:
+  frequency.input1: 220
   lfo1.carrier: 1
-  lfo1.amplitude: 1
+  lfo1.amplitude: 100
   osc1.waveform: 'square'
-  osc1.carrier: 220
 connections:
-  lfo1: osc1.modulation
+  lfo1: frequency.input2
+  frequency: osc1.carrier
   osc1: speaker.input
