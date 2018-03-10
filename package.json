@@ -9,7 +9,6 @@
   "author": "Chip Bell",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "midi": "^0.9.5",
     "node-yaml": "^3.1.1",
     "speaker": "^0.4.0"
   }
