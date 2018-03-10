@@ -2,5 +2,5 @@ module.exports = {
   CHANNELS: 1,
   BIT_DEPTH: 8,
   SAMPLE_RATE: 20000,
-  SAMPLES_PER_READ: 2000
+  SAMPLES_PER_READ: 4000
 };
