@@ -32,7 +32,7 @@ class OscillatorNode extends Node {
     }
 
     // if we're at the end of a cycle for this carrier frequency, let's switch to the next carrier
-    if(this.localT * this.lastCarrier > 1) {
+    if(this.localT * this.lastCarrier > 1 || this.lastCarrier === 0) {
       this.localT = 0;
       this.lastCarrier = this.carrier(t);
     }
