@@ -62,6 +62,9 @@ Its second is `length` which denotes how long to stay on a given value before mo
 ## Adder
 The adder node adds its two inputs `input1` and `input2` and provides the sum as it's output
 
+## Multiplier
+The multiplier multiplies its two inputs `input1` and `input2` and provides the product as it's output
+
 ## Installation Help
 `npm install` may fail on your machine, due to [sound library configuration required by the `speaker` module](https://github.com/TooTallNate/node-speaker#audio-backend-selection).
 In short, you may have to change you npm install to something like `npm install --mpg123-backend=openal` or `npm install --mpg123-backend=coreaudio` depending or your system.
