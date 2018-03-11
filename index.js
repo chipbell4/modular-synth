@@ -2,11 +2,19 @@
 
 const yaml = require('node-yaml');
 const resolveValue = require('./nodes/resolve-value');
+const fs = require('fs');
 
-var nodeTypes = ['Noise', 'Adder', 'Oscillator', 'LowPassFilter', 'Speaker', 'Sequencer', 'Keyboard'].reduce((a, b) => {
-  a[b] = require(`./nodes/${b}Node`);
+console.log('Loading nodes...')
+const nodeTypes = fs.readdirSync('./nodes').reduce((a, filename) => {
+  if(/.Node\.js$/.test(filename)) {
+    const nodeType = filename.replace(/Node\.js/, '');
+    console.log(`  ${nodeType} -> ${filename}`);
+    a[nodeType] = require('./nodes/' + filename);
+  }
+
   return a;
 }, {});
+console.log('Done');
 
 if(process.argv.length !== 3) {
   console.log('Usage: node index.js file.yml');
