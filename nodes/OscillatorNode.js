@@ -10,7 +10,7 @@ class OscillatorNode extends Node {
     this.amplitude = () => 1;
     this.carrier = () => 440;
 
-    this.lastCarrier = this.carrier();
+    this.lastCarrier = this.carrier(0);
     this.lastFrame = null;
     this.localT = 0;
   }
