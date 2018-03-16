@@ -26,9 +26,9 @@ class OscillatorNode extends Node {
 
     let outputValue = 0;
     if(this.waveform === 'sine') {
-      outputValue = this.sine(this.localT);
+      outputValue = this.sine(this.localT, t);
     } else if(this.waveform === 'square') {
-      outputValue = this.square(this.localT);
+      outputValue = this.square(this.localT, t);
     }
 
     // if we're at the end of a cycle for this carrier frequency, let's switch to the next carrier
@@ -42,23 +42,23 @@ class OscillatorNode extends Node {
     // TODO: Support Triangle and sawtooth
   }
 
-  sine(t) {
+  sine(t, globalT) {
     let inner = 2 * Math.PI * this.lastCarrier * t;
-    return 0.5 * this.amplitude(t) * (1 + Math.sin(inner));
+    return 0.5 * this.amplitude(globalT) * (1 + Math.sin(inner));
   }
 
-  square(t) {
+  square(t, globalT) {
     let period = 1 / this.lastCarrier;
     let x = (t % period) / period;
     const d = 0.01;
     if(x < 0.5 - d) {
       return 0;
     } else if(x > 0.5 - d && x < 0.5 + d) {
-      let slope = this.amplitude(t) / 2 / d;
+      let slope = this.amplitude(globalT) / 2 / d;
       let intercept = -(0.5 - d) * slope;
       return slope * x + intercept;
     } else {
-      return this.amplitude(t);
+      return this.amplitude(globalT);
     }
   }
 }
