@@ -3,7 +3,7 @@
 const yaml = require('node-yaml');
 const resolveValue = require('./nodes/resolve-value');
 
-var nodeTypes = ['Noise', 'Adder', 'Oscillator', 'LowPassFilter', 'Speaker', 'Sequencer', 'Keyboard'].reduce((a, b) => {
+var nodeTypes = ['Noise', 'Envelope', 'Adder', 'Oscillator', 'LowPassFilter', 'Speaker', 'Sequencer', 'Keyboard', 'Multiplier'].reduce((a, b) => {
   a[b] = require(`./nodes/${b}Node`);
   return a;
 }, {});

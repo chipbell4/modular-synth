@@ -1,0 +1,22 @@
+nodes:
+    trigger: Sequencer
+    pitch_sweep: Multiplier
+    envelope: Envelope
+    osc1: Oscillator
+values:
+    trigger.sequence: [1, 0, 0, 0, 0, 0, 0]
+    trigger.length: 0.1
+
+    envelope.attack: 0.00001
+    envelope.decay: 0.001
+    envelope.sustain: 0
+    envelope.release: 0.001
+
+    pitch_sweep.input1: 200
+
+    osc1.waveform: 'sine'
+connections:
+    trigger: envelope.trigger
+    envelope: pitch_sweep.input2
+    pitch_sweep: osc1.carrier
+    osc1: speaker.input
