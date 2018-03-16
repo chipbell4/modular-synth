@@ -59,7 +59,7 @@ The sequencer node will loop over an array of values periodically and emit those
 Its first input parameter is `sequence`, an array of values to emit.
 Its second is `length` which denotes how long to stay on a given value before moving to the next one.
 
-## Adder
+### Adder
 The adder node adds its two inputs `input1` and `input2` and provides the sum as it's output
 
 ## Installation Help
