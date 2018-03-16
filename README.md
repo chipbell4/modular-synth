@@ -62,6 +62,19 @@ Its second is `length` which denotes how long to stay on a given value before mo
 ### Adder
 The adder node adds its two inputs `input1` and `input2` and provides the sum as it's output
 
+### Multiplier
+The multiplier node multiplies its two inputs `input1` and `input2` and provides the sum as it's output
+
+### Envelope
+The envelope node provides an [ADSR Envelope](https://en.wikipedia.org/wiki/Synthesizer). You can set a couple of inputs:
+- `attack` the attack time of the envelope
+- `decay` the decay time of the envelope
+- `sustain` the sustain level of the envelope
+- `release` the release time of the envelope
+- `trigger` should be a `1` or a `0` triggering the envelope to start. For instance, if the envelope is silenced,
+   setting `trigger` to 1 will start the envelope. It will attack, then decay, and wait at sustain until a `trigger` of
+  0 is encountered, upon which it will because the release process.
+
 ## Installation Help
 `npm install` may fail on your machine, due to [sound library configuration required by the `speaker` module](https://github.com/TooTallNate/node-speaker#audio-backend-selection).
 In short, you may have to change you npm install to something like `npm install --mpg123-backend=openal` or `npm install --mpg123-backend=coreaudio` depending or your system.
