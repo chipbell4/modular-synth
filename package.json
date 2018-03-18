@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node draw.js"
+    "test": "node draw.js",
+    "start": "node index.js"
   },
   "author": "Chip Bell",
   "license": "BSD-2-Clause",
