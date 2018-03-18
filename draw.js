@@ -74,6 +74,7 @@ Object.keys(layers)
 
 // now draw connections
 ctx.bg(127, 127, 127);
+ctx.brush = '<';
 tree.connections.forEach(connection => {
   var node1 = connection[0];
   var node2 = connection[1];
