@@ -3,8 +3,9 @@ const Node = require('./Node');
 const constants = require('../constants');
 const waveforms = {
   sine: require('../waveforms/sine'),
-  square: require('../waveforms/square')
-  // TODO: Support Triangle and sawtooth
+  square: require('../waveforms/square'),
+  sawtooth: require('../waveforms/sawtooth'),
+  // TODO: Support Triangle
 };
 
 class OscillatorNode extends Node {
