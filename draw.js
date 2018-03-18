@@ -15,7 +15,7 @@ var nodeColorMap = {
 };
 
 if(process.argv.length !== 3) {
-  console.log('Usage: node index.js file.yml');
+  console.log('Usage: node draw.js file.yml');
   process.exit(1);
 }
 
