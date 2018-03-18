@@ -11,7 +11,6 @@ const nodeTypes = fs.readdirSync('./nodes').reduce((a, filename) => {
     console.log(`  ${nodeType} -> ${filename}`);
     a[nodeType] = require('./nodes/' + filename);
   }
-
   return a;
 }, {});
 console.log('Done');
