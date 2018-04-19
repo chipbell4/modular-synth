@@ -1,9 +1,20 @@
 # A Tiny Node Modular Synth
 This is a very basic modular synth I made that's configured with yaml files. You can call it via:
 ```
-node index.js somefile.yml
+npm start path/to/file.yml
 ```
 
+There's some examples in the `examples` folder, which you can try out via:
+```
+npm start examples/chords.yml
+```
+
+Moreover, there's a way to draw the node graph, if you'd like:
+```
+npm test examples/chords.yml
+```
+
+This can be helpful for building your own things and testing them out.
 
 ## Configuring the Synth
 The synth is configured with a YAML file, that is passed as the first argument to the script.
