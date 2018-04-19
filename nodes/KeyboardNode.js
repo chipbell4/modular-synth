@@ -18,7 +18,7 @@ class KeyboardNode extends Node {
     child.on('message', message => this.currentPitch = Number(message));
   }
 
-  value(t) {
+  value() {
     if(this.currentPitch !== null) {
       return this.currentPitch;
     }

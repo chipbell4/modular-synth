@@ -7,7 +7,7 @@ class Node {
   }
 
   value(t) {
-    return 0;
+    return t * 0;
   }
 }
 

@@ -13,7 +13,7 @@ class SequencerNode extends Node {
   value(t) {
     var index = Math.floor(t / this.length(t)) % this.sequence.length;
     return this.sequence[index];
-  };
+  }
 }
 
 module.exports = SequencerNode;

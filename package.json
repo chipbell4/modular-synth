@@ -4,12 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint nodes/*.js"
   },
   "author": "Chip Bell",
   "license": "BSD-2-Clause",
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-console": 0
+    },
+    "env": {
+      "node": true,
+      "browser": true,
+      "es6": true
+    }
+  },
   "dependencies": {
     "node-yaml": "^3.1.1",
     "speaker": "^0.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1"
   }
 }

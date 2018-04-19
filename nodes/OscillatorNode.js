@@ -1,6 +1,5 @@
 'use strict';
 const Node = require('./Node');
-const constants = require('../constants');
 
 class OscillatorNode extends Node {
   constructor() {
