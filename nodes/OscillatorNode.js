@@ -1,6 +1,5 @@
 'use strict';
 const Node = require('./Node');
-const constants = require('../constants');
 const waveforms = {
   sine: require('../waveforms/sine'),
   square: require('../waveforms/square'),
